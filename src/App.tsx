@@ -25,7 +25,6 @@ import {
   Visibility,
   Air,
 } from "@mui/icons-material";
-import { useCities } from "./api/services/useCities";
 
 // Tema personalizado para la aplicación
 const theme = createTheme({
