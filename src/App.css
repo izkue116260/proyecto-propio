@@ -40,3 +40,140 @@
 .read-the-docs {
   color: #888;
 }
+
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.danzas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.danza-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.danza-item:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.danza-header {
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.danza-header:hover {
+  background-color: #e9ecef;
+}
+
+.danza-header h3 {
+  margin: 0;
+  color: #495057;
+  font-size: 1.2em;
+}
+
+.flecha {
+  font-size: 0.8em;
+  color: #6c757d;
+  transition: transform 0.3s ease;
+}
+
+.flecha.abierto {
+  transform: rotate(180deg);
+}
+
+.danza-contenido {
+  padding: 20px;
+  background-color: white;
+  border-top: 1px solid #e9ecef;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.danza-info p {
+  margin: 10px 0;
+  line-height: 1.6;
+  color: #495057;
+}
+
+.danza-info strong {
+  color: #212529;
+}
+
+.youtube-link {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e9ecef;
+}
+
+.youtube-btn {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.youtube-btn:hover {
+  background-color: #c82333;
+  text-decoration: none;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 15px;
+  }
+  
+  .danza-header {
+    padding: 12px 15px;
+  }
+  
+  .danza-contenido {
+    padding: 15px;
+  }
+  
+  .danza-header h3 {
+    font-size: 1.1em;
+  }
+}
