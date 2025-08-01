@@ -1,0 +1,32 @@
+.mapa {
+    height: 400px;
+    border-radius: 2;
+    overflow: visible;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    & .leaflet-container {
+        height: 100%;
+        border-radius: inherit;
+    }
+    & .custom-marker {
+        background: none !important;
+        border: none !important;
+    }
+    & .leaflet-popup {
+        z-index: 1000;
+    }
+    & .leaflet-popup-content-wrapper {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+}
+
+.localidad {
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.listado {
+    padding-left: 0;
+    list-style-position: inside;
+}

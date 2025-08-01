@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Box, Typography } from '@mui/material';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { getRepertorio } from '../../../domain/services/getRepertorio';
 import type { Localidad } from '../../../domain/models/Localidad';
 import styles from '../../../general.module.css';
+import stylesMap from './EuskalHerriaMap.module.css';
 
 const createCustomIcon = () => {
   return L.divIcon({
     className: 'custom-marker',
     html: `
       <div style="
-        background: linear-gradient(135deg, #d32f2f 0%, #1b5e20 100%);
+        background: linear-gradient(135deg, #1b5e20 100%);
         width: 25px;
         height: 25px;
         border-radius: 50% 50% 50% 0;
@@ -48,28 +48,7 @@ export const EuskalHerriaMap: React.FC = () => {
         Errepertorioa
       </h2>
       
-      <Box sx={{ 
-        height: '400px', 
-        borderRadius: 2, 
-        overflow: 'visible', // Cambiado de 'hidden' a 'visible' para que los popups no se corten
-        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-        position: 'relative', // Añadido para el posicionamiento de popups
-        '& .leaflet-container': {
-          height: '100%',
-          borderRadius: 'inherit'
-        },
-        '& .custom-marker': {
-          background: 'none !important',
-          border: 'none !important'
-        },
-        '& .leaflet-popup': {
-          zIndex: 1000, // Asegurar que los popups estén en primer plano
-        },
-        '& .leaflet-popup-content-wrapper': {
-          borderRadius: '8px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
-        }
-      }}>
+      <div className={stylesMap.mapa}>
         <MapContainer
           center={mapCenter}
           zoom={9}
@@ -95,49 +74,30 @@ export const EuskalHerriaMap: React.FC = () => {
               icon={createCustomIcon()}
             >
               <Popup 
-              autoPan={true}
-              autoPanPadding={[10, 10]}
-              keepInView={true}
-              closeOnEscapeKey={true}
-              autoClose={true}
-              closeOnClick={false}
-              maxWidth={300}
-              minWidth={250}
-            >
-                <Box sx={{ textAlign: 'left', p: 1, minWidth: '250px', maxWidth: '280px' }}>
-                  <Typography variant="h6" color="primary" sx={{ fontWeight: 'bold', mb: 1 }}>
-                    {location.name}
-                  </Typography>
-                  {location.danzas && location.danzas.length > 0 && (
-                    <Box>
-                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', color: '#1b5e20', mb: 0.5 }}>
-                        Danzas tradicionales:
-                      </Typography>
-                      <Box component="ul" sx={{ pl: 2, m: 0 }}>
-                        {location.danzas.map((danza, index) => (
-                          <Typography 
-                            key={index} 
-                            component="li" 
-                            variant="body2" 
-                            sx={{ 
-                              fontSize: '0.85rem',
-                              lineHeight: 1.3,
-                              mb: 0.3,
-                              wordWrap: 'break-word'
-                            }}
-                          >
-                            {danza}
-                          </Typography>
-                        ))}
-                      </Box>
-                    </Box>
-                  )}
-                </Box>
+                autoPan={true}
+                autoPanPadding={[10, 10]}
+                keepInView={true}
+                closeOnEscapeKey={true}
+                autoClose={true}
+                closeOnClick={false}
+                maxWidth={300}
+                minWidth={250}
+              >
+                <h3 className={stylesMap.localidad}>
+                  {location.name}
+                </h3>
+                <ul className={stylesMap.listado}>
+                  {location.danzas.map((danza, index) => (
+                    <li key={index}>
+                      {danza}
+                    </li>
+                  ))}
+                </ul>
               </Popup>
             </Marker>
           ))}
         </MapContainer>
-      </Box>
+      </div>
     </>
   );
 };
