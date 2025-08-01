@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useEffect, useState, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { getRepertorio } from '../../../domain/services/getRepertorio';
@@ -28,11 +28,24 @@ const createCustomIcon = () => {
 };
 
 
+// Componente para capturar la referencia del mapa
+const MapInstanceCapture: React.FC<{ mapRef: React.MutableRefObject<L.Map | null> }> = ({ mapRef }) => {
+  const map = useMap();
+  
+  useEffect(() => {
+    mapRef.current = map;
+  }, [map, mapRef]);
+
+  return null;
+};
+
 // Centro del mapa (aproximadamente en el centro de Navarra)
 const mapCenter: [number, number] = [42.7, -1.5];
 
 export const EuskalHerriaMap: React.FC = () => {
   const [locations, setLocations] = useState<Localidad[]>([]);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
     const onLoad = async () => {
@@ -42,13 +55,31 @@ export const EuskalHerriaMap: React.FC = () => {
     onLoad();
   }, []);
 
+  // Event listener global para cerrar popups al hacer clic fuera del mapa
+  useEffect(() => {
+    const handleGlobalClick = (event: MouseEvent) => {
+      if (mapContainerRef.current && mapInstanceRef.current) {
+        // Si el clic no es dentro del contenedor del mapa, cerrar popups
+        if (!mapContainerRef.current.contains(event.target as Node)) {
+          mapInstanceRef.current.closePopup();
+        }
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleGlobalClick, true);
+    };
+  }, []);
+
   return (
     <>
       <h2 className={styles.subtitulo}>
         Errepertorioa
       </h2>
       
-      <div className={stylesMap.mapa}>
+      <div className={stylesMap.mapa} ref={mapContainerRef}>
         <MapContainer
           center={mapCenter}
           zoom={9}
@@ -62,6 +93,7 @@ export const EuskalHerriaMap: React.FC = () => {
           closePopupOnClick={true}
           style={{ height: '100%', width: '100%' }}
         >
+          <MapInstanceCapture mapRef={mapInstanceRef} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
