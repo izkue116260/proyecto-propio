@@ -2,23 +2,6 @@ import type { Localidad } from "../models/Localidad";
 
 export const getRepertorio = async () => {
     const repertorio: Localidad[] = [
-        // Puntos originales
-        {
-          name: "Pamplona/Iruñea",
-          coordenadas: [42.8167, -1.6432],
-          danzas: ["Iruñeko jota", "San Juan bezperako soka dantza"],
-        },
-        {
-          name: "El Ciego", 
-          coordenadas: [42.5167, -2.05],
-          danzas: ["Dantza tradizionalak"],
-        },
-        {
-          name: "Ochagavía/Otsagabia",
-          coordenadas: [42.9833, -1.05],
-          danzas: ["Otsagabiko makil dantza"],
-        },
-    
         // Nuevas ubicaciones de danzas tradicionales vascas
         // NAFARROA
         {
@@ -81,7 +64,6 @@ export const getRepertorio = async () => {
           coordenadas: [43.2833, -1.6833],
           danzas: ["Berako makil dantzak eta bordon dantza", "Berako inauteriak"],
         },
-    
         // GIPUZKOA
         {
           name: "Tolosa",
