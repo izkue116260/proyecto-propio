@@ -29,7 +29,7 @@ const createCustomIcon = () => {
     `,
     iconSize: [25, 25],
     iconAnchor: [12, 25],
-    popupAnchor: [0, -25],
+    popupAnchor: [0, -5], // Cambiado para que el popup aparezca más cerca del icono
   });
 };
 
@@ -208,8 +208,9 @@ const EuskalHerriaMap: React.FC = () => {
       <Box sx={{ 
         height: '400px', 
         borderRadius: 2, 
-        overflow: 'hidden',
+        overflow: 'visible', // Cambiado de 'hidden' a 'visible' para que los popups no se corten
         boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+        position: 'relative', // Añadido para el posicionamiento de popups
         '& .leaflet-container': {
           height: '100%',
           borderRadius: 'inherit'
@@ -217,6 +218,13 @@ const EuskalHerriaMap: React.FC = () => {
         '& .custom-marker': {
           background: 'none !important',
           border: 'none !important'
+        },
+        '& .leaflet-popup': {
+          zIndex: 1000, // Asegurar que los popups estén en primer plano
+        },
+        '& .leaflet-popup-content-wrapper': {
+          borderRadius: '8px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
         }
       }}>
         <MapContainer
@@ -229,6 +237,7 @@ const EuskalHerriaMap: React.FC = () => {
             [43.6, -0.5]  // Noreste (límite norte y este de Euskal Herria)
           ]}
           maxBoundsViscosity={1.0}
+          closePopupOnClick={false}
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
@@ -242,8 +251,16 @@ const EuskalHerriaMap: React.FC = () => {
               position={location.coordinates}
               icon={createCustomIcon()}
             >
-              <Popup>
-                <Box sx={{ textAlign: 'left', p: 1, minWidth: '250px' }}>
+              <Popup 
+              autoPan={true}
+              autoPanPadding={[10, 10]}
+              keepInView={true}
+              closeOnEscapeKey={true}
+              autoClose={false}
+              maxWidth={300}
+              minWidth={250}
+            >
+                <Box sx={{ textAlign: 'left', p: 1, minWidth: '250px', maxWidth: '280px' }}>
                   <Typography variant="h6" color="primary" sx={{ fontWeight: 'bold', mb: 1 }}>
                     {location.name}
                   </Typography>
@@ -261,7 +278,8 @@ const EuskalHerriaMap: React.FC = () => {
                             sx={{ 
                               fontSize: '0.85rem',
                               lineHeight: 1.3,
-                              mb: 0.3
+                              mb: 0.3,
+                              wordWrap: 'break-word'
                             }}
                           >
                             {danza}
