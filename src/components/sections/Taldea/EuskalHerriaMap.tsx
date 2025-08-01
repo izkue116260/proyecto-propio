@@ -138,54 +138,6 @@ export const EuskalHerriaMap: React.FC = () => {
           ))}
         </MapContainer>
       </Box>
-      
-      <Typography variant="body2" sx={{ textAlign: 'center', mt: 2, opacity: 0.7 }}>
-        Euskal dantza tradizionalak eta haien jatorria
-      </Typography>
-
-      {/* Danzas cuyo origen no se ha podido determinar */}
-      <Box sx={{ mt: 4, p: 3, backgroundColor: '#fff3e0', borderRadius: 2, border: '2px solid #ff9800' }}>
-        <Typography variant="h6" gutterBottom color="secondary" sx={{ fontWeight: 'bold' }}>
-          🤔 Dantzen jatorria argitu gabe (Research needed):
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 2, fontStyle: 'italic' }}>
-          Ondorengo dantza hauek ez dugu lortu haien jatorri geografiko zehatza aurkitzen:
-        </Typography>
-        
-        <Box sx={{ pl: 2 }}>
-          <Typography variant="body2" component="div" sx={{ mb: 1 }}>
-            <strong>Nafarroa:</strong> Imozko eskudantza, desmayo, la balsa, Baxenafarroko inauteriak, dantza-luze, jauziak, Pilindros jota, Olagueko esku dantza, Arrarasko zozo dantza, Kauteroen dantzak, Lantzeko inauteriak, Monteagudoko dancea, ballestas, Urdiaingo kantaita, Aurizko prioreen dantza, Aurizko ingurutxoa, Alkozko ingurutxoa, Izabako ttunttuna, Arrosadiko ttunttuna, Txantreako ttunttuna, Leitzako ingurutxoa, Orbaizetako joko dantza, Azpilagañako ezpata dantza, Arrosadiko soka-dantza.
-          </Typography>
-          
-          <Typography variant="body2" component="div" sx={{ mb: 1 }}>
-            <strong>Zuberoa:</strong> Maskaradak (gehigarri gehiago behar dira)
-          </Typography>
-          
-          <Typography variant="body2" component="div" sx={{ mb: 1 }}>
-            <strong>Lapurdi:</strong> Lapurdiko inauteriak, zapatagin dantza, Betteluren fandangoa
-          </Typography>
-          
-          <Typography variant="body2" component="div" sx={{ mb: 1 }}>
-            <strong>Araba:</strong> Biasteriko jota, txulalai
-          </Typography>
-          
-          <Typography variant="body2" component="div" sx={{ mb: 1 }}>
-            <strong>Gipuzkoa:</strong> Zinta dantza, igitai dantza, batelerak, matelota, arku dantza, brokel dantza, boastitzea, uztai dantza, makil handiena, makil txikiena, jorrai dantza, fandango eta arin-arin, aurreskua, ezpata dantza, sorgin dantza, San Juango zortzikoa, soka dantza
-          </Typography>
-          
-          <Typography variant="body2" component="div" sx={{ mb: 1 }}>
-            <strong>Bizkaia:</strong> kaxarranka, mahaigainekoa, dantzari-dantza, gorularien arku dantza eta domingillo, aurreskua
-          </Typography>
-          
-          <Typography variant="body2" component="div" sx={{ mb: 1 }}>
-            <strong>Beste koreografiak:</strong> Amaia ezpata dantza, Debako martxa, orpo-punta polka, polka berria, ipurdi dantza, irradaka, Kintoan barna makil dantza, Mesias Sarritan, Hator-hator, scotish, mazurka, habanera
-          </Typography>
-        </Box>
-        
-        <Typography variant="body2" sx={{ mt: 2, fontStyle: 'italic', color: '#e65100' }}>
-          💡 Laguntza behar dugu dantza hauen jatorri geografikoa zehazteko! Badakizu haietako batuen jatorria? Jarri harremanetan gurekin.
-        </Typography>
-      </Box>
     </>
   );
 };

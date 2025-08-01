@@ -5,6 +5,11 @@ export const getRepertorio = async () => {
         // Nuevas ubicaciones de danzas tradicionales vascas
         // NAFARROA
         {
+          name: "Betelu",
+          coordenadas: [43.024741, -1.980327],
+          danzas: ["Betteluaren fandangoa"],
+        },
+        {
           name: "Lesaka",
           coordenadas: [43.334, -1.667],
           danzas: ["Lesakako ezpata dantza"],
@@ -135,7 +140,7 @@ export const getRepertorio = async () => {
           name: "Mauleón/Mauléon",
           coordenadas: [43.2167, -0.8833],
           danzas: ["Maskaradak", "Zuberoako makil dantza"],
-        },
+        }
       ]; 
 
     return repertorio;
