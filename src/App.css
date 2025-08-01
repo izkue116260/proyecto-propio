@@ -1,179 +1,131 @@
+/* Estilos generales para Oberena Dantza Taldea */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.app-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 30px;
-}
-
-.danzas-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.danza-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.danza-item:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.danza-header {
-  background-color: #f8f9fa;
-  padding: 15px 20px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.3s ease;
-  user-select: none;
-}
-
-.danza-header:hover {
-  background-color: #e9ecef;
-}
-
-.danza-header h3 {
   margin: 0;
-  color: #495057;
-  font-size: 1.2em;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #fafafa;
 }
 
-.flecha {
-  font-size: 0.8em;
-  color: #6c757d;
-  transition: transform 0.3s ease;
-}
-
-.flecha.abierto {
-  transform: rotate(180deg);
-}
-
-.danza-contenido {
-  padding: 20px;
-  background-color: white;
-  border-top: 1px solid #e9ecef;
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
+/* Animaciones y transiciones */
+@keyframes fadeIn {
   from {
     opacity: 0;
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    max-height: 500px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    transform: translateY(0);
   }
 }
 
-.danza-info p {
-  margin: 10px 0;
-  line-height: 1.6;
-  color: #495057;
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
 }
 
-.danza-info strong {
-  color: #212529;
-}
-
-.youtube-link {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #e9ecef;
-}
-
-.youtube-btn {
-  display: inline-block;
-  margin-left: 10px;
-  padding: 8px 16px;
-  background-color: #dc3545;
+/* Estilos para el hero section */
+.hero-section {
+  background: linear-gradient(135deg, #d32f2f 0%, #1b5e20 100%);
   color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 0.9em;
-  transition: background-color 0.3s ease;
+  text-align: center;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.youtube-btn:hover {
-  background-color: #c82333;
-  text-decoration: none;
-  color: white;
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><path d="M0,0 C150,100 350,0 500,50 C650,100 850,0 1000,50 L1000,0 Z"/></svg>') repeat-x;
+  background-size: 1000px 100px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .app-container {
-    padding: 15px;
+/* Estilos para las cards */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Estilos específicos para Oberena Dantza Taldea */
+.oberena-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos para la navegación */
+.nav-button-active {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  font-weight: bold;
+}
+
+/* Estilos para las secciones de contenido */
+.content-section {
+  animation: fadeIn 0.6s ease-out;
+  min-height: 400px;
+}
+
+/* Estilos para las tarjetas de espectáculos */
+.espectaculo-card {
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid #d32f2f;
+}
+
+.espectaculo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(211, 47, 47, 0.15);
+}
+
+/* Estilos para el footer */
+.footer {
+  margin-top: auto;
+  background: linear-gradient(135deg, #d32f2f 0%, #1b5e20 100%);
+}
+
+/* Estilos para iconos de contacto */
+.contact-icon {
+  color: #d32f2f;
+  margin-right: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 0;
   }
   
-  .danza-header {
-    padding: 12px 15px;
+  .hero-section h1 {
+    font-size: 2rem;
   }
   
-  .danza-contenido {
-    padding: 15px;
+  .hero-section h2 {
+    font-size: 1.5rem;
   }
-  
-  .danza-header h3 {
-    font-size: 1.1em;
-  }
+}
+
+/* Hover effects para las cards principales */
+.main-card {
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.main-card:hover {
+  border-left-color: #d32f2f;
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.1);
+}
+
+/* Estilo para el chip de 75 años */
+.anniversary-chip {
+  font-size: 1.1rem !important;
+  padding: 0.5rem 1rem !important;
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24) !important;
+  color: white !important;
+  font-weight: bold !important;
 }
