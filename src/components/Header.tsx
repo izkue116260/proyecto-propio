@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -34,6 +34,27 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [scrolled, setScrolled] = useState(false);
+  
+  const seccionesConFoto = ['inicio'];
+  const shouldShowBackground = seccionesConFoto.includes(seccionActiva) && !scrolled;
+
+  // Detectar scroll para cambiar el header
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 100;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Reset scroll state when section changes
+    setScrolled(window.scrollY > 100);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [seccionActiva]);
 
   const navegacion = [
     { id: 'inicio' as Seccion, label: 'Hasiera' },
@@ -64,22 +85,34 @@ const Header: React.FC<HeaderProps> = ({
               letterSpacing: '0.5px',
               overflow: 'hidden',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              backgroundColor: seccionActiva === item.id 
-                ? 'rgba(255, 255, 255, 0.25)' 
+                            backgroundColor: seccionActiva === item.id 
+                ? (shouldShowBackground
+                  ? 'transparent' 
+                  : 'rgba(255, 255, 255, 0.25)') 
                 : 'transparent',
-              backdropFilter: seccionActiva === item.id ? 'blur(10px)' : 'none',
+              backdropFilter: seccionActiva === item.id && (!shouldShowBackground) ? 'blur(10px)' : 'none',
               border: seccionActiva === item.id 
-                ? '1px solid rgba(255, 255, 255, 0.3)' 
+                ? (shouldShowBackground
+                  ? '2px solid rgba(255, 255, 255, 0.8)' 
+                  : '1px solid rgba(255, 255, 255, 0.3)') 
                 : '1px solid transparent',
               boxShadow: seccionActiva === item.id 
-                ? '0 8px 32px rgba(0, 0, 0, 0.12)' 
+                ? (shouldShowBackground
+                  ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
+                  : '0 8px 32px rgba(0, 0, 0, 0.12)') 
                 : 'none',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(15px)',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
+                            '&:hover': {
+                backgroundColor: shouldShowBackground
+                  ? 'rgba(255, 255, 255, 0.15)' 
+                  : 'rgba(255, 255, 255, 0.2)',
+                backdropFilter: shouldShowBackground? 'none' : 'blur(15px)',
+                border: shouldShowBackground
+                  ? '2px solid rgba(255, 255, 255, 0.9)' 
+                  : '1px solid rgba(255, 255, 255, 0.4)',
                 transform: 'translateY(-2px)',
-                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+                boxShadow: shouldShowBackground
+                  ? '0 6px 25px rgba(0, 0, 0, 0.4)' 
+                  : '0 12px 40px rgba(0, 0, 0, 0.15)',
               },
               '&:active': {
                 transform: 'translateY(0px)',
@@ -106,16 +139,38 @@ const Header: React.FC<HeaderProps> = ({
     </>
   );
 
+  // Calcular el background dinámico del header
+  const getHeaderBackground = () => {
+    if (shouldShowBackground) {
+      // Completamente transparente en secciones con imagen cuando no hay scroll
+      return 'transparent';
+    } else {
+      // Rojo cuando hay scroll o en secciones sin imagen
+      return 'linear-gradient(135deg, rgba(211, 47, 47, 0.95) 0%, rgba(198, 40, 40, 0.95) 100%)';
+    }
+  };
+
+  const getHeaderBorder = () => {
+    if (shouldShowBackground) {
+      return 'none';
+    } else {
+      return '1px solid rgba(255, 255, 255, 0.1)';
+    }
+  };
+
   return (
     <>
       <AppBar 
         position="fixed" 
         elevation={0}
         sx={{ 
-          background: 'linear-gradient(135deg, rgba(211, 47, 47, 0.95) 0%, rgba(198, 40, 40, 0.95) 100%)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+          background: getHeaderBackground(),
+          backdropFilter: shouldShowBackground? 'blur(5px)' : 'blur(20px)',
+          borderBottom: getHeaderBorder(),
+          boxShadow: shouldShowBackground 
+            ? 'none'
+            : '0 8px 32px rgba(0, 0, 0, 0.1)' ,
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
         <Toolbar sx={{ py: 1 }}>
@@ -130,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({
               background: 'linear-gradient(45deg, #ffffff 30%, #f0f0f0 90%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+              transition: 'text-shadow 0.3s ease',
             }}
           >
             Oberena Dantza Taldea
@@ -146,9 +201,24 @@ const Header: React.FC<HeaderProps> = ({
               sx={{
                 borderRadius: 2,
                 transition: 'all 0.3s ease',
-                backgroundColor: menuAbierto ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                backgroundColor: menuAbierto 
+                  ? (shouldShowBackground
+                    ? 'rgba(255, 255, 255, 0.15)' 
+                    : 'rgba(255, 255, 255, 0.2)') 
+                  : 'transparent',
+                border: menuAbierto && shouldShowBackground
+                  ? '2px solid rgba(255, 255, 255, 0.8)' 
+                  : 'none',
+                filter: shouldShowBackground
+                  ? 'drop-shadow(0 2px 6px rgba(0,0,0,0.8))' 
+                  : 'none',
                 '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  backgroundColor: shouldShowBackground
+                    ? 'rgba(255, 255, 255, 0.25)' 
+                    : 'rgba(255, 255, 255, 0.2)',
+                  border: shouldShowBackground
+                    ? '2px solid rgba(255, 255, 255, 0.9)' 
+                    : 'none',
                   transform: 'scale(1.1)',
                 },
               }}
