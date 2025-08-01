@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Container } from '@mui/material';
+import { Cabecera } from './components/Cabecera';
 import {
   Header,
   Footer,
@@ -55,6 +56,7 @@ const App: React.FC = () => {
         onCambiarSeccion={cambiarSeccion}
         onToggleMenu={toggleMenu}
       />
+      <Cabecera />
 
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4, flex: 1 }}>
         {renderContenido()}

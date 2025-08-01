@@ -12,4 +12,3 @@ export { default as EspectaculosSection } from './sections/EspectaculosSection';
 export { default as AgendaSection } from './sections/AgendaSection';
 export { default as FotosSection } from './sections/FotosSection';
 export { default as ContactoSection } from './sections/ContactoSection';
-export { default as HeroSection } from './sections/InicioSection/HeroSection';

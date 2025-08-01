@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './InicioSection.module.css';
+import styles from './Cabecera.module.css';
 
 const CREACION_GRUPO = 1941;
 
-const HeroSection: React.FC = () => {
+export const Cabecera: React.FC = () => {
   const edadGrupo = new Date().getFullYear() - CREACION_GRUPO;
 
   return (
@@ -23,4 +23,3 @@ const HeroSection: React.FC = () => {
   );
 };
 
-export default HeroSection;
