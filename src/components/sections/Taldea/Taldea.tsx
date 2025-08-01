@@ -1,5 +1,5 @@
 import React from 'react';
-import EuskalHerriaMap from '../../EuskalHerriaMap';
+import {EuskalHerriaMap} from './EuskalHerriaMap';
 import styles from './Taldea.module.css';
 
 export const Taldea: React.FC = () => {

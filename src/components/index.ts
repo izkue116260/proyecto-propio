@@ -2,7 +2,6 @@
 export { default as Header } from './Header';
 export { default as Footer } from './Footer';
 export { default as ImagePlaceholder } from './ImagePlaceholder';
-export { default as EuskalHerriaMap } from './EuskalHerriaMap';
 
 // Secciones
 export { default as GrupoSection } from './sections/GrupoSection';

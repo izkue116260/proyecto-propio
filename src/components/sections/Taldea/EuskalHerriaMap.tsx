@@ -39,7 +39,7 @@ interface DanceLocation {
   danzas?: string[];
 }
 
-const EuskalHerriaMap: React.FC = () => {
+export const EuskalHerriaMap: React.FC = () => {
   // Coordenadas de los puntos con sus danzas tradicionales
   const locations: DanceLocation[] = [
     // Puntos originales
@@ -347,4 +347,3 @@ const EuskalHerriaMap: React.FC = () => {
   );
 };
 
-export default EuskalHerriaMap;
