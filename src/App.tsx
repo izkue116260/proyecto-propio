@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Container } from '@mui/material';
 import { Cabecera } from './components/Cabecera';
+import { Taldea } from './components/sections/Taldea';
 import {
   Header,
   Footer,
-  InicioSection,
   GrupoSection,
   HistoriaSection,
   EspectaculosSection,
@@ -30,7 +30,7 @@ const App: React.FC = () => {
   const renderContenido = () => {
     switch (seccionActiva) {
       case 'inicio':
-        return <InicioSection />;
+        return <Taldea />;
       case 'grupo':
         return <GrupoSection />;
       case 'historia':
@@ -44,7 +44,7 @@ const App: React.FC = () => {
       case 'contacto':
         return <ContactoSection />;
       default:
-        return <InicioSection />;
+        return <Taldea />;
     }
   };
 

@@ -1,0 +1,1 @@
+export { Taldea } from './Taldea';

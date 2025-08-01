@@ -5,7 +5,6 @@ export { default as ImagePlaceholder } from './ImagePlaceholder';
 export { default as EuskalHerriaMap } from './EuskalHerriaMap';
 
 // Secciones
-export { default as InicioSection } from './sections/InicioSection/InicioSection';
 export { default as GrupoSection } from './sections/GrupoSection';
 export { default as HistoriaSection } from './sections/HistoriaSection';
 export { default as EspectaculosSection } from './sections/EspectaculosSection';
