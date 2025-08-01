@@ -1,18 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Box, Typography } from '@mui/material';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { getRepertorio } from '../../../domain/services/getRepertorio';
+import type { Localidad } from '../../../domain/models/Localidad';
 
-// Fix para los iconos de Leaflet en React
-delete (L.Icon.Default.prototype as unknown as { _getIconUrl: unknown })._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
-
-// Icono personalizado en colores vascos
 const createCustomIcon = () => {
   return L.divIcon({
     className: 'custom-marker',
@@ -29,175 +22,24 @@ const createCustomIcon = () => {
     `,
     iconSize: [25, 25],
     iconAnchor: [12, 25],
-    popupAnchor: [0, -5], // Cambiado para que el popup aparezca más cerca del icono
+    popupAnchor: [0, -5],
   });
 };
 
-interface DanceLocation {
-  name: string;
-  coordinates: [number, number];
-  danzas?: string[];
-}
+
+// Centro del mapa (aproximadamente en el centro de Navarra)
+const mapCenter: [number, number] = [42.7, -1.5];
 
 export const EuskalHerriaMap: React.FC = () => {
-  // Coordenadas de los puntos con sus danzas tradicionales
-  const locations: DanceLocation[] = [
-    // Puntos originales
-    {
-      name: "Pamplona/Iruñea",
-      coordinates: [42.8167, -1.6432] as [number, number],
-      danzas: ["Iruñeko jota", "San Juan bezperako soka dantza"],
-    },
-    {
-      name: "El Ciego", 
-      coordinates: [42.5167, -2.05] as [number, number],
-      danzas: ["Dantza tradizionalak"],
-    },
-    {
-      name: "Ochagavía/Otsagabia",
-      coordinates: [42.9833, -1.05] as [number, number],
-      danzas: ["Otsagabiko makil dantza"],
-    },
+  const [locations, setLocations] = useState<Localidad[]>([]);
 
-    // Nuevas ubicaciones de danzas tradicionales vascas
-    // NAFARROA
-    {
-      name: "Lesaka",
-      coordinates: [43.334, -1.667] as [number, number],
-      danzas: ["Lesakako ezpata dantza"],
-    },
-    {
-      name: "Estella/Lizarra",
-      coordinates: [42.6702, -2.0280] as [number, number],
-      danzas: ["Lizarrako larrain dantza", "Baile de la Era"],
-    },
-    {
-      name: "Tudela",
-      coordinates: [42.0604, -1.6056] as [number, number],
-      danzas: ["Tuterako jota", "Tuterako inauterietako polka"],
-    },
-    {
-      name: "Sangüesa/Zangoza",
-      coordinates: [42.5708, -1.2839] as [number, number],
-      danzas: ["Zangozako jota"],
-    },
-    {
-      name: "Falces",
-      coordinates: [42.3833, -1.8333] as [number, number],
-      danzas: ["Faltzesko zinta dantza"],
-    },
-    {
-      name: "Aoiz/Agoitz",
-      coordinates: [42.7833, -1.35] as [number, number],
-      danzas: ["Agoizko txokolatearen jota"],
-    },
-    {
-      name: "Valle del Baztán",
-      coordinates: [43.15, -1.52] as [number, number],
-      danzas: ["Baztango irri dantzak", "Baztango sagar dantzak", "Baztango mutil dantzak"],
-    },
-    {
-      name: "Cortes",
-      coordinates: [42.0167, -1.6167] as [number, number],
-      danzas: ["Cortesko dancea"],
-    },
-    {
-      name: "Jaurrieta",
-      coordinates: [42.9, -1.1] as [number, number],
-      danzas: ["Jaurrietako neska dantza"],
-    },
-    {
-      name: "Arraioz",
-      coordinates: [43.1167, -1.5167] as [number, number],
-      danzas: ["Arraiozko maiak"],
-    },
-    {
-      name: "Goizueta",
-      coordinates: [43.1833, -1.8333] as [number, number],
-      danzas: ["Goizuetako zahagi dantza"],
-    },
-    {
-      name: "Bera",
-      coordinates: [43.2833, -1.6833] as [number, number],
-      danzas: ["Berako makil dantzak eta bordon dantza", "Berako inauteriak"],
-    },
+  useEffect(() => {
+    const onLoad = async () => {
+      setLocations(await getRepertorio());
+    }
 
-    // GIPUZKOA
-    {
-      name: "Tolosa",
-      coordinates: [43.1333, -2.0667] as [number, number],
-      danzas: ["Bordon dantza"],
-    },
-    {
-      name: "Legazpi",
-      coordinates: [43.05, -2.3333] as [number, number],
-      danzas: ["Ezpata dantza"],
-    },
-    {
-      name: "Oñate/Oñati",
-      coordinates: [43.0333, -2.4167] as [number, number],
-      danzas: ["Corpus Christi dantzak"],
-    },
-    {
-      name: "Berastegi",
-      coordinates: [43.1167, -2.05] as [number, number],
-      danzas: ["San Juan Dantzak"],
-    },
-    {
-      name: "Antzuola",
-      coordinates: [43.0833, -2.3833] as [number, number],
-      danzas: ["Troquel Dantza", "Sorgin Dantza"],
-    },
-    {
-      name: "Lasarte-Oria",
-      coordinates: [43.2667, -2.0167] as [number, number],
-      danzas: ["Sorgin Dantza"],
-    },
-    {
-      name: "Aretxabaleta",
-      coordinates: [43.0667, -2.45] as [number, number],
-      danzas: ["Txino Dantza"],
-    },
-    {
-      name: "Deba",
-      coordinates: [43.2983, -2.3519] as [number, number],
-      danzas: ["San Roke Dantza"],
-    },
-
-    // BIZKAIA
-    {
-      name: "Durango",
-      coordinates: [43.1667, -2.6333] as [number, number],
-      danzas: ["Dantzari Dantza", "Vizcayan Sword Dance Suite"],
-    },
-    {
-      name: "Lekeitio",
-      coordinates: [43.3639, -2.5044] as [number, number],
-      danzas: ["Kaxarranka", "Andrazkoen aurreskua"],
-    },
-    {
-      name: "Markina-Xemein",
-      coordinates: [43.2667, -2.4833] as [number, number],
-      danzas: ["Xemeingo ezpata dantza"],
-    },
-
-    // ARABA
-    {
-      name: "Eltziego",
-      coordinates: [42.5167, -2.6333] as [number, number],
-      danzas: ["Eltziegoko dantzak"],
-    },
-
-    // ZUBEROA
-    {
-      name: "Mauleón/Mauléon",
-      coordinates: [43.2167, -0.8833] as [number, number],
-      danzas: ["Maskaradak", "Zuberoako makil dantza"],
-    },
-  ];
-
-  // Centro del mapa (aproximadamente en el centro de Navarra)
-  const mapCenter: [number, number] = [42.7, -1.5];
+    onLoad();
+  }, []);
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -248,7 +90,7 @@ export const EuskalHerriaMap: React.FC = () => {
           {locations.map((location, index) => (
             <Marker
               key={index}
-              position={location.coordinates}
+              position={location.coordenadas}
               icon={createCustomIcon()}
             >
               <Popup 

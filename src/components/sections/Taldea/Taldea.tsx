@@ -16,7 +16,6 @@ export const Taldea: React.FC = () => {
           2012an dantzari beteranoen taldea sortu zen, taldean urte luzez dantzan aritu diren lagunek osatua. Hilabetean bitan elkartzen dira entsaiatzeko, eta bi jaialditan parte hartzen dute: Gure Dantzak eta abenduaren 3ko Oberenako dantzarien eguna. Talde horretan 23 lagun biltzen dira. Helduendako ikastaroa batik bat dantzarien gurasoez osaturik badago ere, edozeinek parte har dezake. Gaur egun 17 lagunek osatzen dute talde hori.
         </p>
 
-      {/* Mapa de Euskal Herria */}
       <EuskalHerriaMap />
     </>
   );
