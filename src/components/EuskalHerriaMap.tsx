@@ -256,7 +256,8 @@ const EuskalHerriaMap: React.FC = () => {
               autoPanPadding={[10, 10]}
               keepInView={true}
               closeOnEscapeKey={true}
-              autoClose={false}
+              autoClose={true}
+              closeOnClick={false}
               maxWidth={300}
               minWidth={250}
             >
