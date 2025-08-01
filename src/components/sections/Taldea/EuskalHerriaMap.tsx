@@ -59,7 +59,7 @@ export const EuskalHerriaMap: React.FC = () => {
             [43.6, -0.5]  // Noreste (límite norte y este de Euskal Herria)
           ]}
           maxBoundsViscosity={1.0}
-          closePopupOnClick={false}
+          closePopupOnClick={true}
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
