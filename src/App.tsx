@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Box, Container } from '@mui/material';
 import { Cabecera } from './components/Cabecera';
 import { Taldea } from './components/sections/Taldea';
 import {
@@ -12,6 +11,7 @@ import {
   FotosSection,
   ContactoSection,
 } from './components';
+import styles from './general.module.css';
 import './App.css';
 
 type Seccion = 'inicio' | 'grupo' | 'historia' | 'espectaculos' | 'agenda' | 'fotos' | 'contacto';
@@ -49,21 +49,21 @@ const App: React.FC = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <>
       <Header
         seccionActiva={seccionActiva}
         menuAbierto={menuAbierto}
         onCambiarSeccion={cambiarSeccion}
         onToggleMenu={toggleMenu}
       />
-      <Cabecera />
+      {seccionActiva === 'inicio' && <Cabecera />}
 
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, flex: 1 }}>
+      <div className={styles.layout}>
         {renderContenido()}
-      </Container>
+      </div>
 
       <Footer />
-    </Box>
+    </>
   );
 };
 
