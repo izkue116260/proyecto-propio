@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { getRepertorio } from '../../../domain/services/getRepertorio';
 import type { Localidad } from '../../../domain/models/Localidad';
+import styles from '../../../general.module.css';
 
 const createCustomIcon = () => {
   return L.divIcon({
@@ -42,10 +43,10 @@ export const EuskalHerriaMap: React.FC = () => {
   }, []);
 
   return (
-    <Box sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom color="primary" sx={{ textAlign: 'center', mb: 3 }}>
-        Gure Lekuak Euskal Herrian
-      </Typography>
+    <>
+      <h2 className={styles.subtitulo}>
+        Errepertorioa
+      </h2>
       
       <Box sx={{ 
         height: '400px', 
@@ -185,7 +186,7 @@ export const EuskalHerriaMap: React.FC = () => {
           💡 Laguntza behar dugu dantza hauen jatorri geografikoa zehazteko! Badakizu haietako batuen jatorria? Jarri harremanetan gurekin.
         </Typography>
       </Box>
-    </Box>
+    </>
   );
 };
 
