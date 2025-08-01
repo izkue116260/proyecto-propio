@@ -1,14 +1,13 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import HeroSection from './HeroSection';
-import EuskalHerriaMap from '../EuskalHerriaMap';
+import EuskalHerriaMap from '../../EuskalHerriaMap';
 
 const InicioSection: React.FC = () => {
   return (
     <Box>
       <HeroSection />
       
-      {/* Gure Taldea - Sin bordes, a todo lo ancho */}
       <Box sx={{ mt: 4, mb: 4 }}>
         <Typography variant="h4" gutterBottom color="primary" sx={{ 
           textAlign: 'center',

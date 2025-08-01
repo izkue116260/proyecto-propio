@@ -1,0 +1,37 @@
+
+.cabecera {
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(rgba(211, 47, 47, 0.7), rgba(27, 94, 32, 0.7)), url('https://oberenadantzataldea.eus/wp-content/uploads/2018/11/taldea.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    padding: 50px;
+}
+
+.tituloPrincipal {
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-size: 60px;
+}
+
+.subtitulo {
+    font-weight: 400;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-size: 24px;
+}
+
+.tag {
+    font-size: 16px;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+

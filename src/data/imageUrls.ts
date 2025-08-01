@@ -2,12 +2,6 @@
 // Imágenes de alta calidad de danza vasca tradicional seleccionadas específicamente
 
 export const imageUrls = {
-  // Hero Section - imagen panorámica de grupo de danza vasca
-  hero: {
-    main: "https://oberenadantzataldea.eus/wp-content/uploads/2018/11/taldea.jpg",
-    alt: "Oberena Dantza Taldea - Euskal dantza tradizionala"
-  },
-
   // Espectáculos principales - cada uno con imagen específica
   spectacles: {
     oroitzapenHutsak: {
