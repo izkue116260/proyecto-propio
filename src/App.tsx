@@ -58,7 +58,7 @@ const App: React.FC = () => {
       />
       {seccionActiva === 'inicio' && <Cabecera />}
 
-      <div className={styles.layout}>
+      <div className={styles.layout} style={{ marginTop: seccionActiva !== 'inicio' ? '100px' : '0px' }}>
         {renderContenido()}
       </div>
 
