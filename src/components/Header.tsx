@@ -63,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <AppBar position="static" sx={{ background: 'linear-gradient(135deg, #d32f2f 0%, #c62828 100%)' }}>
+      <AppBar position="fixed" sx={{ background: 'linear-gradient(135deg, #d32f2f 0%, #c62828 100%)' }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
             Oberena Dantza Taldea
