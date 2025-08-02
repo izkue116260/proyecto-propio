@@ -73,6 +73,11 @@ export const EuskalHerriaMap: React.FC = () => {
     };
   }, []);
 
+
+  if(locations.length === 0) {
+    return <div>Cargando...</div>;
+  }
+  
   return (
     <>
       <h2 className={styles.subtitulo}>
@@ -102,7 +107,7 @@ export const EuskalHerriaMap: React.FC = () => {
           {locations.map((location, index) => (
             <Marker
               key={index}
-              position={location.coordenadas}
+              position={[location.coordenadaX, location.coordenadaY]}
               icon={createCustomIcon()}
             >
               <Popup 
@@ -119,9 +124,9 @@ export const EuskalHerriaMap: React.FC = () => {
                   {location.name}
                 </h3>
                 <ul className={stylesMap.listado}>
-                  {location.danzas.map((danza, index) => (
+                  {location.bailes.map((dantza, index) => (
                     <li key={index}>
-                      {danza}
+                      {dantza}
                     </li>
                   ))}
                 </ul>
